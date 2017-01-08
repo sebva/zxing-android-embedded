@@ -268,8 +268,7 @@ public class CaptureManager {
                 // permission was granted
                 barcodeView.resume();
             } else {
-                // TODO: display better error message.
-                displayFrameworkBugMessageAndExit();
+                displayMessageAndExit(R.string.zxing_msg_missing_camera_permissions);
             }
         }
     }
@@ -397,13 +396,13 @@ public class CaptureManager {
         closeAndFinish();
     }
 
-    protected void displayFrameworkBugMessageAndExit() {
+    protected void displayMessageAndExit(int stringId) {
         if (activity.isFinishing() || this.destroyed || finishWhenClosed) {
             return;
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.zxing_app_name));
-        builder.setMessage(activity.getString(R.string.zxing_msg_camera_framework_bug));
+        builder.setMessage(activity.getString(stringId));
         builder.setPositiveButton(R.string.zxing_button_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -417,6 +416,10 @@ public class CaptureManager {
             }
         });
         builder.show();
+    }
+
+    protected void displayFrameworkBugMessageAndExit() {
+        displayMessageAndExit(R.string.zxing_msg_camera_framework_bug);
     }
 
     public static int getCameraPermissionReqCode() {
