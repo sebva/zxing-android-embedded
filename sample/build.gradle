@@ -11,6 +11,10 @@ android {
         versionName "3.6.0"
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     def validConfig
     def keystoreFile
     def keystorePassword

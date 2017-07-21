@@ -34,6 +34,7 @@ android {
         // Android warns about the he and id locale folders. he -> iw is already handled with a
         // symlink. TODO: what about id?
         disable 'LocaleFolder'
+        abortOnError false
     }
 
     compileOptions {
